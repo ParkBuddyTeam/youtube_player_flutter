@@ -104,7 +104,6 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   final YoutubePlayerParams params;
 
   /// The [WebViewController] that drives the player
-  @internal
   late final WebViewController webViewController;
 
   late final YoutubePlayerEventHandler _eventHandler;
