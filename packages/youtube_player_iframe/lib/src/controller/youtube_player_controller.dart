@@ -677,7 +677,13 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
 
     return playerHtml.replaceAllMapped(
       RegExp(r'<<([a-zA-Z]+)>>'),
-      (m) => data[m.group(1)] ?? m.group(0)!,
+      (m) {
+         final dataVal = data[m.group(1)];
+         final matchVal = m.group(0)!;
+         print("DataVal: " + dataVal);
+         print("MatchVal: " + matchVal);
+         return dataVal ?? matchVal;
+      },
     );
   }
 
