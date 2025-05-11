@@ -675,7 +675,7 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
       'packages/youtube_player_iframe/assets/player.html',
     );
 
-    return playerHtml.replaceAllMapped(
+    final result = playerHtml.replaceAllMapped(
       RegExp(r'<<([a-zA-Z]+)>>'),
       (m) {
          final dataVal = data[m.group(1)];
@@ -685,6 +685,8 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
          return data[m.group(1)] ?? m.group(0)!;
       },
     );
+    print("Got result: ${result}");
+    return result;
   }
 
   /// Disposes the resources created by [YoutubePlayerController].
