@@ -62,7 +62,7 @@
   <body>
     <div class="video-container">
       <div class="video-foreground">
-        <div id="<<playerId>>"></div>
+        <div id="MainPlayer"></div>
       </div>
     </div>
 
@@ -78,7 +78,7 @@
       var timerId;
 
       function onYouTubeIframeAPIReady() {
-        player = new YT.Player("<<playerId>>", {
+        player = new YT.Player("MainPlayer", {
           host: host,
           playerVars: <<playerVars>>,
           videoId: "<<realVideoId>>",
@@ -147,10 +147,10 @@
       function sendPlatformMessage(message) {
         switch(platform) {
            case 'android':
-             <<playerId>>.postMessage(message);
+             MainPlayer.postMessage(message);
              break;
            case 'ios':
-             <<playerId>>.postMessage(message, '*');
+             MainPlayer.postMessage(message, '*');
              break;
            case 'web':
              window.parent.postMessage(message, '*');
