@@ -682,7 +682,7 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
          final matchVal = m.group(0)!;
          print("DataVal: " + dataVal);
          print("MatchVal: " + matchVal);
-         return (dataVal ?? matchVal)!;
+         return data[m.group(1)] ?? m.group(0)!;
       },
     );
   }
