@@ -58,7 +58,7 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(navigationDelegate)
       ..setUserAgent(params.userAgent)
-      ..addJavaScriptChannel(playerId, onMessageReceived: _eventHandler.call)
+      ..addJavaScriptChannel("MainPlayer", onMessageReceived: _eventHandler.call)
       ..enableZoom(false);
 
     final webViewPlatform = webViewController.platform;
