@@ -676,6 +676,8 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
       'packages/youtube_player_iframe/assets/player.html',
     );
 
+    print("Got data: ${data}");
+
     final result = playerHtml.replaceAllMapped(
       RegExp(r'<<([a-zA-Z]+)>>'),
       (m) {
