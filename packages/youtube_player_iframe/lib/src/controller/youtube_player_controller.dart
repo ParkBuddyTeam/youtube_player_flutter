@@ -267,6 +267,7 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
     final platform = kIsWeb ? 'web' : defaultTargetPlatform.name.toLowerCase();
     final playerData = {
       'playerId': id,
+      'realVideoId': id.replaceFirst('Youtube', ''),
       'pointerEvents': params.pointerEvents.name,
       'playerVars': params.toJson(),
       'platform': platform,
