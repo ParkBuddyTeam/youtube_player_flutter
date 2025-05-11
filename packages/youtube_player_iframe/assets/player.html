@@ -80,6 +80,7 @@
       function onYouTubeIframeAPIReady() {
         player = new YT.Player("<<playerId>>", {
           host: host,
+          videoId: <<realVideoId>>,
           playerVars: <<playerVars>>,
           events: {
             onReady: function (event) {
