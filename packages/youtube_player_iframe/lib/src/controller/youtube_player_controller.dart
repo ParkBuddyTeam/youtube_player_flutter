@@ -677,24 +677,14 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
       cache: false,
     );
 
-    print("Got data: ${data}");
-    print("------");
-    print("Got player html: ${playerHtml}");
-    print("------");
-
     final result = playerHtml.replaceAllMapped(
       RegExp(r'<<([a-zA-Z]+)>>'),
       (m) {
          final dataVal = data[m.group(1)];
          final matchVal = m.group(0)!;
-         print("DataKey: ${m.group(1)}");
-         print("DataVal: ${dataVal ?? 'Nothing'}");
-         print("MatchVal: ${matchVal}");
-         print("------");
          return data[m.group(1)] ?? m.group(0)!;
       },
     );
-    print("Got result: ${result}");
     return result;
   }
 
