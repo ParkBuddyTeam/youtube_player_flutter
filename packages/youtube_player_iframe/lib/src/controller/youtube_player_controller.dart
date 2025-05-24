@@ -672,13 +672,13 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   }
 
   Future<String> _buildPlayerHTML(Map<String, String> data) async {
-    final vars = data['playerVars'];
+    final vars = data?['playerVars'];
     print("PlayerVars: ${vars}");
-    final portrait = vars['portrait'];
+    final portrait = vars?['portrait'];
     print("Portrait: ${portrait}");
     
     final playerHtml = await rootBundle.loadString(
-      portrait ? 'packages/youtube_player_iframe/assets/player.html' :  'packages/youtube_player_iframe/assets/player_v2.html',
+      portrait == 'true' ? 'packages/youtube_player_iframe/assets/player.html' :  'packages/youtube_player_iframe/assets/player_v2.html',
       cache: false,
     );
 
