@@ -275,7 +275,7 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
     };
 
     await webViewController.loadHtmlString(
-      await _buildPlayerHTML(playerData),
+      await _buildPlayerHTML(params.portrait, playerData),
       baseUrl: baseUrl,
     );
   }
@@ -671,14 +671,11 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
     return NavigationDecision.prevent;
   }
 
-  Future<String> _buildPlayerHTML(Map<String, String> data) async {
-    final vars = data?['playerVars'];
-    print("PlayerVars: ${vars}");
-    final portrait = vars?['portrait'];
+  Future<String> _buildPlayerHTML(bool portrait, Map<String, String> data) async {
     print("Portrait: ${portrait}");
     
     final playerHtml = await rootBundle.loadString(
-      portrait == 'true' ? 'packages/youtube_player_iframe/assets/player.html' :  'packages/youtube_player_iframe/assets/player_v2.html',
+      portrait ? 'packages/youtube_player_iframe/assets/player.html' :  'packages/youtube_player_iframe/assets/player_v2.html',
       cache: false,
     );
 
