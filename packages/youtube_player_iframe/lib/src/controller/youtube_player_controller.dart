@@ -675,7 +675,7 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
     print("Portrait: ${portrait}");
     
     final playerHtml = await rootBundle.loadString(
-      portrait ? 'packages/youtube_player_iframe/assets/player.html' :  'packages/youtube_player_iframe/assets/player_v2.html',
+      portrait ? 'packages/youtube_player_iframe/assets/player_v2.html' :  'packages/youtube_player_iframe/assets/player.html',
       cache: false,
     );
 
