@@ -27,6 +27,9 @@ class YoutubePlayerParams {
   /// Default is true.
   final bool enableCaption;
 
+  /// Default is true
+  final bool portrait;
+
   /// Defines whether or not the player reacts to pointer events.
   ///
   /// See the [Mozilla Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events) for detail.
@@ -117,6 +120,7 @@ class YoutubePlayerParams {
     this.enableCaption = true,
     this.pointerEvents = PointerEvents.initial,
     this.color = 'white',
+    this.portrait = true,
     this.showControls = true,
     this.enableKeyboard = kIsWeb,
     this.enableJavaScript = true,
@@ -135,6 +139,7 @@ class YoutubePlayerParams {
     return {
       'autoplay': 1,
       'mute': _boolean(mute),
+      'portrait': _boolean(portrait),
       'cc_lang_pref': captionLanguage,
       'cc_load_policy': _boolean(enableCaption),
       'color': color,
