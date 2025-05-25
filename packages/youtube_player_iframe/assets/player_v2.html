@@ -27,16 +27,29 @@
       .video-foreground iframe {
         pointer-events: none;
       }
+      .yt-wrapper-portrait {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* or any portrait height */
+        overflow: hidden;
+      }
+      
+      .yt-wrapper-portrait iframe {
+        position: absolute;
+        top: -15%;  /* adjust to crop title/logo */
+        left: 0;
+        width: 100%;
+        height: 130%;  /* zoom in vertically */
+        border: 0;
+      }
     </style>
     <title>Youtube Player</title>
   </head>
 
   <body>
-    <div class="video-container">
-      <div class="video-foreground">
+      <div class="yt-wrapper-portrait">
         <div id="MainPlayer"></div>
       </div>
-    </div>
 
     <script>
       var tag = document.createElement("script");
@@ -48,6 +61,7 @@
       var host = "<<host>>";
       var player;
       var timerId;
+      var latestScreenshot = null;
 
       function onYouTubeIframeAPIReady() {
         player = new YT.Player("MainPlayer", {
@@ -63,12 +77,12 @@
               clearTimeout(timerId);
               sendMessage('StateChange', event.data);
               if (event.data == 1) {
-                timerId = setInterval(function () {
+                timerId = setInterval(async function () {
                   var state = {
                     'currentTime': player.getCurrentTime(),
                     'loadedFraction': player.getVideoLoadedFraction()
                   };
-
+                  await captureScreenshot();
                   sendMessage('VideoState', JSON.stringify(state));
                 }, 100);
               }
@@ -92,6 +106,19 @@
         });
         player.setSize(window.innerWidth, window.innerHeight);
       }
+
+      async function captureScreenshot() {
+            try {
+                const canvas = await html2canvas(document.body);
+                latestScreenshot = canvas.toDataURL('image/png');
+            } catch (e) {
+                latestScreenshot = 'ERROR:' + e.message;
+            }
+        }
+
+        function getLatestScreenshot() {
+            return latestScreenshot;
+        }
 
       window.addEventListener('message', (event) => {
         try {
