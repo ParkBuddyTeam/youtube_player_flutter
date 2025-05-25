@@ -179,6 +179,15 @@
         return prepareDataForPlatform(player.getAvailablePlaybackRates());
       }
 
+      async function screenshot() {
+        try {
+          const canvas = await html2canvas(document.body);
+          return canvas.toDataURL('image/png');
+        } catch (e) {
+          return 'ERROR:' + e.message;
+        }
+      }
+
       function prepareDataForPlatform(data) {
         if(platform == 'android') return data;
 
