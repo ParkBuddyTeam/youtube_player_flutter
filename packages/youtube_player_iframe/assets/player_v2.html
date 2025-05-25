@@ -128,6 +128,23 @@
         player.setSize(window.innerWidth, window.innerHeight);
       };
 
+      function adjustIframeForPortrait() {
+        const iframe = document.getElementById('MainPlayer');
+        const screenRatio = window.innerWidth / window.innerHeight;
+        const videoRatio = 16 / 9;
+
+        if (screenRatio < videoRatio) {
+          // Zoom in to fit height
+          const scale = videoRatio / screenRatio;
+          iframe.style.width = `${scale * 100}vw`;
+          iframe.style.height = `100vh`;
+          iframe.style.left = `${-(scale - 1) / 2 * 100}vw`;
+          iframe.style.top = `0`;
+        }
+      }
+      window.addEventListener('resize', adjustIframeForPortrait);
+      window.addEventListener('load', adjustIframeForPortrait);
+
       function sendPlatformMessage(message) {
         switch(platform) {
            case 'android':
