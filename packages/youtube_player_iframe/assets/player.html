@@ -76,7 +76,6 @@
       var host = "<<host>>";
       var player;
       var timerId;
-      var latestScreenshot = null;
 
       function onYouTubeIframeAPIReady() {
         player = new YT.Player("MainPlayer", {
@@ -92,13 +91,12 @@
               clearTimeout(timerId);
               sendMessage('StateChange', event.data);
               if (event.data == 1) {
-                timerId = setInterval(async function () {
+                timerId = setInterval(function () {
                   var state = {
                     'currentTime': player.getCurrentTime(),
                     'loadedFraction': player.getVideoLoadedFraction()
                   };
 
-                  await captureScreenshot();
                   sendMessage('VideoState', JSON.stringify(state));
                 }, 100);
               }
@@ -158,19 +156,6 @@
              window.parent.postMessage(message, '*');
              break;
          }
-      }
-
-      async function captureScreenshot() {
-          try {
-              const canvas = await html2canvas(document.body);
-              latestScreenshot = canvas.toDataURL('image/png');
-          } catch (e) {
-              latestScreenshot = 'ERROR:' + e.message;
-          }
-      }
-
-      function getLatestScreenshot() {
-          return latestScreenshot;
       }
 
       function sendMessage(key, data) {
