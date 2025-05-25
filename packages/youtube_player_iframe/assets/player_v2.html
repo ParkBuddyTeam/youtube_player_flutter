@@ -87,28 +87,7 @@
                   sendMessage('VideoState', JSON.stringify(state));
                 }, 100);
               } else {
-                await showScreenshotOverlay();
-              }
-
-
-              
-              clearTimeout(timerId);
-              sendMessage('StateChange', event.data);
-            
-              if (event.data === YT.PlayerState.PAUSED) {
-                await showScreenshotOverlay();
-              }
-            
-              if (event.data === YT.PlayerState.PLAYING) {
-                document.getElementById('video-overlay').style.display = 'none';
-            
-                timerId = setInterval(function () {
-                  var state = {
-                    'currentTime': player.getCurrentTime(),
-                    'loadedFraction': player.getVideoLoadedFraction()
-                  };
-                  sendMessage('VideoState', JSON.stringify(state));
-                }, 100);
+                showScreenshotOverlay();
               }
             },
             onPlaybackQualityChange: function (event) {
